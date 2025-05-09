@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'star_favourite_21830.ico' %}">
+</head>
+<body>
+<div>
+    <form onsubmit="return validateForm()" method="post" action="{% url 'button_click_3' %}" id="myForm">
+        <div class="formRes">
+        <div class="blockVac">
+            <p class="titleTest">Выбранные компетенции:</p>
+            <ul>
+                {% for student_comp_i in student_comp %}
+                    <li><p style="text-align: justify; margin:20px 20px 0px 0px;">{{student_comp_i}}</p></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="slider-container">
+            <div class="slider">
+                {% for description_i in rating_num_description_vac %}
+                    <div class="blockVac">
+                            <p class="titleTest">Рекомендованная профессия</p>
+                        <div style="margin-left: 20px;">
+                            <p style="font-size:21px;">{{description_i.1}}</p>
+                        </div>
+                            <p class="titleTest" style="font-size: 18px;">Описание вакансии:</p>
+                            <p style="text-align: justify; margin:20px">{{description_i.2}}</p>
+                            <div class="scale">
+                                <p style="font-weight: bold;">Оцените, насколько подходит данная вакансия</p>
+                                <input type="radio" name="{{description_i.0}}" value="0" id="rating0"><label for="rating0">0</label>
+                                <input type="radio" name="{{description_i.0}}" value="1" id="rating1"><label for="rating1">1</label>
+                                <input type="radio" name="{{description_i.0}}" value="2" id="rating2"><label for="rating2">2</label>
+                                <input type="radio" name="{{description_i.0}}" value="3" id="rating3"><label for="rating3">3</label>
+                                <input type="radio" name="{{description_i.0}}" value="4" id="rating4"><label for="rating4">4</label>
+                                <input type="radio" name="{{description_i.0}}" value="5" id="rating5"><label for="rating5">5</label>
+                            </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button type="button" class="prev-button" aria-label="Посмотреть предыдущий слайд">&lt;</button>
+            <button type="button" class="next-button" aria-label="Посмотреть следующий слайд">&gt</button>
+        </div>
+            </div>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="indexBtn"><button class="btn" type="submit" name="button_click_3" style="margin-right:20px;">Оценить результаты</button></div>
+    </form>
+<div class="containerSkills" >
+    <p style="font-size:24px;">Дополнительные ключевые навыки, востребованные работодателями</p>
+    <div class="blockSkills">
+        {% for key_skills_i in key_skills %}
+            <div class="keySkills">{{key_skills_i}}</div>
+        {% endfor %}
+    </div>
+</div>
+</div>
+<script src="{% static 'main.js' %}"></script>
+<script src="{% static 'resPage.js' %}"></script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'style_admin.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'star_favourite_21830.ico' %}">
+    <title>Результаты тестирования</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'addProgram' %}">Учебные программы</a>
+        <a href="{% url 'pageResultReport' %}">Результаты тестирования</a>
+        <a style="margin-right:20px;" href="{% url 'index' %}">Выход</a>
+    </header>
+    <div class="container">
+        <h1>Результаты тестирования</h1>
+        <p>В таблице выведены последние 100 результатов тестирования. Записи отсортированы по дате.</p>
+        <form method="post"  action="{% url 'download_results' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button class="download_res_st" type="submit"  name="button_download_resultsExcel">Скачать таблицу</button>
+        </form>
+        {{ html_table | safe }}
+    </div>
+</body>
+</html>

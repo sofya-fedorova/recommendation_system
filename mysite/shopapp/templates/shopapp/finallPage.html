@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'star_favourite_21830.ico' %}">
+    <title>Спасибо за участие!</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Спасибо за прохождение тестирования!</h1>
+        <a style="margin-right:20px;" href="{% url 'index' %}">Пройти заново</a>
+    </div>
+</body>
+</html>

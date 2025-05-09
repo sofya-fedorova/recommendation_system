@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Тест</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'star_favourite_21830.ico' %}">
+
+</head>
+<body>
+    <div class="loaddingProcess" style="display: none;" id="hiddenElements">
+        <div class="pleaseWaite">
+            <p class="pred">Предсказываем результаты...</p>
+            <img src="../../static/cat-mystical.gif" alt="Котик:)">
+        </div>
+    </div>
+<div class="blockTest">
+    <div class="containerTest">
+        <p class="titleTest" style="margin-left:0px;">Выберите компетенции, которые Вам итересны или те, которые Вы бы хотели развивать:</p>
+
+    <form onsubmit="return validateForm({{request.session.lenNameComp}})" method="post" action="{% url 'button_click_2' %}">
+    {% csrf_token %}
+        <div name="selectComp" class="contentTest">
+             {% block content %}
+                {% for name in name_comp %}
+
+        <div class = 'radioButton'>
+            <p>{{ name.3 }}</p>
+             <input type="radio" name= "{{ name.0 }}" value="{{ name.1 }}"> Интересно </input><br>
+            <input type="radio" name="{{ name.0 }}" value="{{ name.2 }}"> Неинтересно </input><br>
+        </div>
+                {% endfor %}
+            {% endblock %}
+        </div>
+       {{ form.as_p }}
+       <button class="btn" type="submit" name="button_name_2" id="toggleButton">Далее</button>
+    </form>
+    </div>
+</div>
+<script src="{% static 'main.js' %}"></script>
+</body>
+</html>

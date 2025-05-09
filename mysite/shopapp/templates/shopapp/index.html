@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link href="{% static 'MultiSelect.css' %}" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'star_favourite_21830.ico' %}">
+    <title>{% block title %}Главная страница{% endblock %}</title>
+</head>
+<body>
+<header>
+        <a href="{% url 'pageEnter' %}">
+    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<g>
+	<path d="M932.254,490.726L772.835,331.315c-11.754-11.755-30.775-11.771-42.53-0.094c-11.786,11.684-11.896,30.748-0.267,42.582
+		L836.411,482H408.187c-16.636,0-30.132,13.357-30.132,30s13.497,30,30.132,30H838.2L730.21,650.055
+		c-11.755,11.763-11.755,30.887,0,42.649c5.885,5.885,13.606,8.848,21.312,8.848c7.706,0,15.427-2.933,21.312-8.818l159.419-159.406
+		c5.649-5.65,8.82-13.314,8.82-21.302C941.073,504.039,937.903,496.375,932.254,490.726z"/>
+	<path d="M698.927,787.552c-16.636,0-30,13.489-30,30.132V964h-526V60h526v146.376c0,16.643,13.364,30.132,30,30.132
+		c16.635,0,30-13.489,30-30.132V29.914C728.927,13.27,715.238,0,698.603,0H113.032C96.397,0,82.927,13.27,82.927,29.914v964.233
+		c0,16.643,13.47,29.854,30.106,29.854h585.571c16.635,0,30.324-13.21,30.324-29.854V817.684
+		C728.927,801.041,715.562,787.552,698.927,787.552z"/>
+</g>
+</svg> </a>
+</header>
+<div>
+<div style="margin-top:20px;" class="container">
+    <h1>Пройдите тестирование!</h1>
+
+
+<form method="post" action="{% url 'button_click' %}" id="myForm" novalidate>
+
+        <p>Введите электронную почту</p>
+        <input class="inputField" type="email" id="email" name="email">
+        <p>Введите место учебы</p>
+        <select name="placeOfWork" class="content" id="placeOfWork">
+                <option value="" disabled selected>Выберите значение</option>
+                <option value="МГУ имени М. В. Ломоносова">МГУ имени М. В. Ломоносова</option>
+                <option value="МГТУ имени Н. Э. Баумана">МГТУ имени Н. Э. Баумана</option>
+                <option value="МФТИ">МФТИ</option>
+                <option value="СПбГУ">СПбГУ</option>
+                <option value="НИЯУ МИФИ">НИЯУ МИФИ</option>
+                <option value="НИУ ВШЭ">НИУ ВШЭ</option>
+                <option value="Томский политехнический университет">Томский политехнический университет</option>
+                 <option value="Томский государственный университет">Томский государственный университет</option>
+                 <option value="СПбПУ Петра Великого">СПбПУ Петра Великого</option>
+                <option value="УрФУ">УрФУ</option>
+                <option value="Финансовый университет при Правительстве РФ">Финансовый университет при Правительстве РФ</option>
+                <option value="ИТМО">ИТМО</option>
+                <option value="РЭУ имени Г. В. Плеханова">РЭУ имени Г. В. Плеханова</option>
+                <option value="МИСИС">МИСИС</option>
+                <option value="РУДН">РУДН</option>
+                <option value="РУДН">РАУ</option>
+                <option value="Другое">Другое</option>
+        </select>
+<!--        <input class="inputField" name="placeOfWork" id="placeOfWork">-->
+        <p>Выберите уровень образования</p>
+        <select name="post" class="content" id="post">
+            <option value="" disabled selected>Выберите значение</option>
+            <option value="бакалавр">бакалавр</option>
+            <option value="магистр">магистр</option>
+            <option value="аспирант">аспирант</option>
+        </select>
+        <p>Выберите направление образования</p>
+        <select name="selectNameProg" class="content">
+             {% block content %}
+                {% for name in name_prog %}
+                    <option>{{ name }}</option>
+                {% endfor %}
+
+        </select>
+        <p>Профессиональная область</p>
+        <select id="roles" name="roles" data-placeholder="Выберите значение" multiple data-multi-select>
+            {% for role in roles %}
+                <option value="{{ role }}">{{ role }}</option>
+            {% endfor %}
+            {% endblock %}
+        </select>
+         {% csrf_token %}
+       {{ form.as_p }}
+    <div class="indexBtn">
+        <button class="btn" type="submit" name="button_name">Далее</button>
+    </div>
+   </form>
+    </div>
+</div>
+<script src="{% static 'scriptIndex.js' %}"></script>
+<script src="{% static 'MultiSelect.js' %}"></script>
+</body>
+</html>

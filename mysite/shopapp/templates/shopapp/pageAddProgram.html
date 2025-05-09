@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'style_admin.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'star_favourite_21830.ico' %}">
+    <title>Добавление данных</title>
+</head>
+<body>
+    <header>
+        <a href="{% url 'addProgram' %}">Учебные программы</a>
+        <a href="{% url 'pageResultReport' %}">Результаты тестирования</a>
+        <a style="margin-right:20px;" href="{% url 'index' %}">Выход</a>
+    </header>
+    <div class="container">
+        <h1>Обновление учебных программ</h1>
+        <p>Вы можете обновить таблицу с обучающими программами или добавить новые записи.
+            Если Вы хотите обновить таблицу, загрузите Excel-файл, который содержит все необходимые записи.
+            Если Вы хотите добавить навые записи, то загрузите Excel-файл, который содержит только новые записи.</p>
+        <form method="post" action="{% url 'upload_file' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file">
+            <button type="submit"  name="button_update">Обновить таблицу</button>
+            <button type="submit"  name="button_add">Добавить записи</button>
+        </form>
+        <h3>Обучающие программы</h3>
+        {{ html_table | safe }}
+    </div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+body{
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10%;
+    font-family: Roboto, sans-serif;
+}
+
+header{
+    display: flex;
+    padding: 30px 0px;
+    color: white;
+    justify-content: end;
+    width: 100%;
+    background-color: #1c1e20;
+    border-radius: 10px;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+a{
+    text-decoration: none; /* Убираем подчеркивание */
+    color: inherit;
+    cursor: pointer;
+}
+
+a:hover {
+    text-decoration: underline; /* Добавляем подчеркивание при наведении */
+}
+
+th {
+    text-align: left; /* Левостороннее выравнивание */
+}
+
+.container{
+    margin-bottom: 50px;
+}
+
+.download_res_st{
+    margin-bottom: 20px;
+}

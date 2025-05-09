@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'star_favourite_21830.ico' %}">
+    <title>{% block title %}Вход{% endblock %}</title></head>
+<body>
+    <div class="container" style="width:auto; padding: 40px 140px;">
+        <h1>Войдите в аккаунт</h1>
+        <form method="post" action="{% url 'button_enter_click' %}" id="myForm" novalidate>
+            <p>Введите логин</p>
+            <input class="inputField" id="login" style="width: 90%;" name="login">
+            <p>Введите пароль</p>
+            <input class="inputField" id="password" style="width: 90%;" type="password" name="password">
+            {% if error_message %}
+                <p id="validForm">{{ error_message }}</p>
+            {% endif %}
+            <div class="btn_center">
+                <button id="btn_enter" class="btn" type="submit" name="button_enter_click"> Войти </button>
+            </div>
+            {% csrf_token %}
+            {{ form.as_p }}
+        </form>
+    </div>
+<script src="{% static 'scriptEnter.js' %}"></script>
+</body>
+</html>

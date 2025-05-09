@@ -1,0 +1,263 @@
+body{
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #20334c; /**#beedb7;**/
+    font-family: Roboto, sans-serif;
+}
+
+.container{
+    background-color: white; /** #62639b; **/
+    padding: 40px 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    border-radius: 40px;
+    width: 583px;
+}
+
+.content{
+    padding: 10px 10px;
+    font-size: 16px;
+    width: 100%;
+}
+.indexBtn{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn{
+    border-radius: 20px;
+    padding: 5px 25px;
+    font-size: 16px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+.inputField{
+    width:96%;
+    padding: 10px;
+    font-size: 16px;
+}
+.containerTest{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+    border-radius: 40px;
+    padding: 30px 50px;
+}
+
+.contentTest{
+    margin-bottom: 30px;
+    font-size: 18px;
+}
+
+.titleTest{
+    margin-bottom: 10px;
+    font-size: 24px;
+    margin-left: 20px;
+}
+
+.containerResult{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: white;
+    border-radius: 40px;
+    padding: 30px 50px;
+}
+
+.nameProf{
+    font-size:18px;
+}
+
+ul {
+  padding-left: 16px;
+  list-style-type: none;
+}
+
+ul li {
+  padding-left: 2rem;
+  background-image: url(star_favourite_21830.ico);
+  background-position: 6px 2px;
+  background-size: 1.0rem 1.0rem;
+  background-repeat: no-repeat;
+}
+
+.page-title {
+  text-align: center;
+}
+
+.slider-container {
+  position: relative;
+/**  width: 600px;
+  height: 400px; **/
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.slider {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.prev-button,
+.next-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: black;
+}
+
+.prev-button {
+  left: 10px;
+}
+
+.next-button {
+  right: 10px;
+}
+
+.blockVac{
+    background-color: white;
+    width: 700px;
+    /**height: 309px; **/
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.scale {
+    display: inline-block;
+    margin: 20px 20px 20px 20px;
+    font-size: 16px;
+}
+
+.scale input[type="radio"] {
+    margin-right: 10px;
+}
+
+.formRes{
+    display: flex;
+    flex-direction: row;
+}
+
+.loaddingProcess{
+    position: absolute; /* или fixed */
+    top: 0;
+    left: 0;
+    width: 100vw; /* Ширина на всю ширину окна */
+    height: 100vh; /* Высота на всю высоту окна */
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный чёрный фон */
+    font-size: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999; /* Высокий индекс для наложения поверх остальных элементов */
+}
+
+.blockTest{
+    position: relative;
+}
+
+.pleaseWaite{
+    width: 500px;
+    height: 300px;
+    border-radius: 20px;
+    background-color: white;
+}
+
+img{
+    width: 190px;
+}
+
+.pred{
+    margin-bottom: 0px;
+}
+
+.noScroll {
+    overflow: hidden;
+}
+
+header{
+    margin-right: 100px;
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+svg{
+    width: 30px;
+    fill: white;
+}
+
+.btn_center{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.blockSkills{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-content: stretch;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.keySkills{
+    background-color: #96aace;
+    text-align:center;
+    padding: 8px;
+    width:8rem;
+    border-radius: 8px;
+    color: white;
+    margin: 8px;
+}
+.containerSkills{
+    background-color: white; /** #62639b; **/
+    padding: 40px 40px;
+    border-radius: 40px;
+    width: 1440px;
+    margin: 40px 20px 20px 20px;
+}
+@media (max-width: 1560px) {
+    .blockVac {
+        width: 500px;
+    }
+    .containerSkills{
+        width: 1040px;
+    }
+}
+
+@media (max-width: 1159px) {
+    .blockVac {
+        width: 400px;
+    }
+    .containerSkills{
+        width: 840px;
+    }
+}
+@media (max-width: 440px) {
+    .formRes {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    }
+}
+
