@@ -1,9 +1,3 @@
-/*
- * Created by David Adams
- * https://codeshack.io/multi-select-dropdown-html-javascript/
- *
- * Released under the MIT license
- */
 class MultiSelect {
 
     constructor(element, options = {}) {
@@ -61,9 +55,7 @@ class MultiSelect {
         }
         let selectAllHTML = '';
         if (this.options.selectAll === true || this.options.selectAll === 'true') {
-            selectAllHTML = `<div class="multi-select-all">
-                <span class="multi-select-option-radio"></span>
-                <span class="multi-select-option-text">Выбрать все</span>
+            selectAllHTML = `<div class="multi-select-all" style="margin:0; padding:0;">
             </div>`;
         }
         let template = `

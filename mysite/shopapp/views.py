@@ -14,7 +14,7 @@ from .get_db import addUser, getResInfo, update_table_EduProgram, add_rows_EduPr
 import pandas as pd
 from datetime import datetime
 
-from .parseVacancy import getListRole
+from .parseVacancy import getListRole, getAreas
 
 
 def index(request):
@@ -22,9 +22,25 @@ def index(request):
     listNameRole, r = getListRole()
     request.session['listNameRole'] = listNameRole
     request.session['jsonRoles'] = r
+    areas, dict_globalArea = getAreas()
+
+    dictionary_area = {}
+    for i in range(len(areas)):
+        if (areas[i][0] == '113'):
+            dictionary_area[areas[i][3]] = int(areas[i][2])
+
+    z = dictionary_area | dict_globalArea
+    z = dict(sorted(z.items()))
+    z['Россия'] = 113
+
+    request.session['jsonRegion'] = z
+    choices = list(z.keys())
+
+
     context = {
         'name_prog': get_edu_table(),
-        'roles': listNameRole
+        'roles': listNameRole,
+        'regions': choices
     }
     drop_rows()
     return render(request, 'shopapp/index.html', context)
@@ -39,11 +55,15 @@ def button_click_view(request):
         request.session['NameProg'] = request.POST.get("selectNameProg")
         request.session['user'] = request.POST.get("selectNameProg")
 
+        request.session['region'] = request.POST.getlist("regions[]")
+
         request.session['profRolesForStu'] = request.POST.getlist("roles[]")
-        if(len(request.POST.getlist("roles[]"))!=0):
+        if((len(request.POST.getlist("roles[]"))!=0) & (len(request.POST.getlist("regions[]"))!=0)):
             return HttpResponseRedirect('pageTest')
         else:
-            return HttpResponse("Выберите профессиональную область!")
+            return HttpResponse("Заполните все поля!")
+
+
 
 
 def button_click_view_2(request):
@@ -75,6 +95,11 @@ def button_click_view_3(request):
                 vacancyName=str(request.session.get('name_vac', None)),
                 indexVac=str(request.session.get('index_vac', None)),
                 rateStudent=str(request.session.get('rating', None)),
+
+                profRolesForStu=str(request.session.get('profRolesForStu', None)),
+                region=str(request.session.get('region', None)),
+                cosRes=str(request.session.get('cosRes', None)),
+
                 dateAdded=str(now.strftime("%Y-%m-%d %H:%M:%S")))
 
         # Создание DataFrame
@@ -113,7 +138,10 @@ def resultPage(request):
     name, key_skills, employer_list, vacancyName, name_prog, edu, cosRes = getCosDistance(request.session['NameProg'],
                                                                                           request.session['valueComp'],
                                                                                           request.session['profRolesForStu'],
-                                                                                          request.session['jsonRoles'])
+                                                                                          request.session['jsonRoles'],
+                                                                                          request.session['jsonRegion'],
+                                                                                          request.session['region']
+                                                                                         )
     description_vac = getResInfo(vacancyName)
 
     rating_num_description_vac = []

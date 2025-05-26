@@ -135,7 +135,7 @@
 .multi-select .multi-select-options .multi-select-search::placeholder {
   color: #b2b5b9;
 }
-.multi-select .multi-select-header, .multi-select .multi-select-option, .multi-select .multi-select-all {
+.multi-select .multi-select-header, .multi-select .multi-select-option, .multi-select {
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
@@ -147,4 +147,9 @@
   width: 100%;
   font-size: 16px;
   color: #212529;
+}
+
+.multi-select-all{
+    margin: 0;
+    padding: 0;
 }

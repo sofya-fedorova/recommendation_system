@@ -1,3 +1,4 @@
+import json
 import time
 import requests
 import pandas as pd
@@ -12,6 +13,31 @@ def getListRole():
         listNameRole.append(r['categories'][i]['name'])
 
     return listNameRole, r
+
+def getAreas():
+    req = requests.get('https://api.hh.ru/areas', verify=False)
+    data = req.content.decode()
+    req.close()
+    jsObj = json.loads(data)
+    areas = []
+    for k in jsObj:
+        for i in range(len(k['areas'])):
+            if len(k['areas'][i]['areas']) != 0:                      # Если у зоны есть внутренние зоны
+                for j in range(len(k['areas'][i]['areas'])):
+                    areas.append([k['id'],
+                                  k['name'],
+                                  k['areas'][i]['areas'][j]['id'],
+                                  k['areas'][i]['areas'][j]['name']])
+            else:                                                                # Если у зоны нет внутренних зон
+                areas.append([k['id'],
+                              k['name'],
+                              k['areas'][i]['id'],
+                              k['areas'][i]['name']])
+
+    dict_globalArea = {}
+    for k in range(len(jsObj[0]['areas'])):
+        dict_globalArea[jsObj[0]['areas'][k]['name']] = jsObj[0]['areas'][k]['id']
+    return areas, dict_globalArea
 
 def get_url(number_of_pages, per_page, role, city):
     data=[]
@@ -52,7 +78,7 @@ def clean_data(list_skills):
 def clean_description(a):
     return a.replace('&quot;', '')
 
-def get_df(number_of_pages, per_page, job, name_role):
+def get_df(number_of_pages, per_page, job, name_role, city):
     name_vac, vah = get_url(number_of_pages, per_page, job, 1)
 
     # берем только цифры из ссылки вакансии
@@ -80,8 +106,8 @@ def get_df(number_of_pages, per_page, job, name_role):
     df['type'] = name_role
     return df
 
-def getNewVacancy(vacancies, number_of_pages, per_page, name_role,):
-    df = get_df(number_of_pages, per_page, vacancies,name_role)
+def getNewVacancy(vacancies, number_of_pages, per_page, name_role,city):
+    df = get_df(number_of_pages, per_page, vacancies,name_role, city)
     return df
 
 def get_all_roles(r, type):

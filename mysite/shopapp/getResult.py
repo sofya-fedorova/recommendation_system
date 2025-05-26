@@ -34,7 +34,7 @@ def getVacancy():
     closeConnection(conn)
     return data_vac
 
-def getCosDistance(name_prog, value_comp, profRolesForStu, jsonRoles):
+def getCosDistance(name_prog, value_comp, profRolesForStu, jsonRoles, jsonCity, cities):
     current_dir = os.path.dirname(os.path.abspath(__file__))
     model_path = os.path.join(current_dir, 'SBERT.pth')
     model = torch.load(model_path)
@@ -44,11 +44,13 @@ def getCosDistance(name_prog, value_comp, profRolesForStu, jsonRoles):
     per_page = 20
     number_of_pages = 5
     data = pd.DataFrame()
-    for i in profRolesForStu:
-        vacancies = get_all_roles(jsonRoles, i)
-        data_t = getNewVacancy(vacancies, number_of_pages, per_page, i)
-        data_t['type'] = i
-        data = pd.concat([data, data_t])
+    for city in cities:
+        code_city = jsonCity[city]
+        for i in profRolesForStu:
+            vacancies = get_all_roles(jsonRoles, i)
+            data_t = getNewVacancy(vacancies, number_of_pages, per_page, i, code_city)
+            data_t['type'] = i
+            data = pd.concat([data, data_t])
 
     data['description_old'] = data['description']
     data = data[['name', 'description_old', 'description', 'key_skills', 'employer', 'type']]

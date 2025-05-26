@@ -32,13 +32,14 @@ def getResInfo(vacancyName):
 
     return list(temp_df['description_old'])
 
-
-def addUser(email='email', placeOfWork='place', post='post', programCode='progCode', programEduName='eduName', studentComp='studentComp', vacancyName='vacancyName',indexVac='test', rateStudent=0, dateAdded='test'):
+def addUser(email='email', placeOfWork='place', post='post', programCode='progCode',
+            programEduName='eduName', studentComp='studentComp', vacancyName='vacancyName',
+            indexVac='test', rateStudent=0, profRolesForStu='', region='', cosRes='0', dateAdded='test',):
     connection = getConnection()
     cursor = connection.cursor()
-    user_data = (email, placeOfWork, post, programCode, programEduName, studentComp, vacancyName, indexVac, rateStudent, dateAdded)
+    user_data = (email, placeOfWork, post, programCode, programEduName, studentComp, vacancyName, indexVac, rateStudent, profRolesForStu, region, cosRes, dateAdded)
     insert_query = """INSERT INTO users (email, placeOfWork, post, programCode,
-     programEduName, studentComp, vacancyName, indexVac, rateStudent, dateAdded) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
+     programEduName, studentComp, vacancyName, indexVac, rateStudent, profRolesForStu, region, cosRes, dateAdded) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"""
     cursor.execute(insert_query, user_data)
     connection.commit()
     closeConnection(connection)
@@ -87,7 +88,7 @@ def get_Users():
     data = pd.DataFrame(data_vac)
     data.rename(columns={0: 'id', 1: 'email', 2: 'Образовательное учреждение', 3: 'Уровень образования', 4: 'Код программы',
                          5: 'Наименование программы', 6: 'Компетенции студента',
-                         7: 'Наименования вакансий', 8: 'Индексы вакансий', 9: 'Рейтинг', 10: 'Дата'}, inplace=True)
+                         7: 'Наименования вакансий', 8: 'Индексы вакансий', 9: 'Рейтинг', 10: 'Проф.область', 11: 'Регион', 12: 'Косинус', 13: 'Дата'}, inplace=True)
     return (data)
 
 def get_edu_table():
